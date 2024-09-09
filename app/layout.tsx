@@ -9,6 +9,7 @@ import {
   UserButton,
 } from '@clerk/nextjs';
 import { ThemeProvider } from '@/components/theme-provider'
+import { Toaster } from '@/components/ui/toaster'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -34,6 +35,7 @@ export default function RootLayout({
             <UserButton />
           </SignedIn> */}
           {children}
+          <Toaster/>
           </ThemeProvider>
         </body>
       </html>
