@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { Home, Menu, Plus, Settings, Sparkle, Sparkles } from 'lucide-react';
+import { Home,  Plus, Settings } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 export const Sidebar = () => {
   const pathname = usePathname();
@@ -27,6 +27,7 @@ export const Sidebar = () => {
     },
   ];
   const onNavigate =(url:string, pro:boolean) => {
+    console.log(pro)
     //   TODO: Check if pro
     return router.push(url);
   }

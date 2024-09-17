@@ -11,7 +11,7 @@ interface CategoriesProps {
 
 import React from 'react';
 
-const Categories = ({ data }: { data: Category[] }) => {
+const Categories = ({ data }: CategoriesProps) => {
   const router = useRouter();
   const params = useSearchParams();
   const categoryId = params.get('categoryId');

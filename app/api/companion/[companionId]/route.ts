@@ -20,6 +20,7 @@ export const PATCH = async (request: Request, { params }: { params: { companionI
     // Check for subcription
     const companion = await prisma.companion.update({
       where:{
+        userId: user.id,
         id: params.companionId
       },
       data: {
@@ -40,4 +41,26 @@ export const PATCH = async (request: Request, { params }: { params: { companionI
     return new NextResponse('Internal Server Error', { status: 500 })
   }
 
+}
+
+
+export const DELETE = async (request: Request, { params }: { params: { companionId: string } }) => {
+  try {
+    const user = await currentUser();
+    if(!user||!user.id||!user.firstName){
+      return new NextResponse('Unauthorized', { status: 401 })
+    }
+
+    const companion = await prisma.companion.delete({
+      where: {
+        userId: user.id,
+        id: params.companionId
+      }
+    });
+
+    return NextResponse.json(companion);
+  } catch (error) {
+    console.log(error)
+    return new NextResponse('Internal Server Error', { status: 500 })
+  }
 }

@@ -10,7 +10,7 @@ interface ImageUploadProps {
   disabled?: boolean;
 }
 
-const ImageUpload = ({ value, onChange, disabled }: ImageUploadProps) => {
+const ImageUpload = ({ value, onChange }: ImageUploadProps) => {
   const [mounted, setIsMounted] = useState(false);
   useEffect(() => {
     setIsMounted(true);
@@ -22,7 +22,7 @@ const ImageUpload = ({ value, onChange, disabled }: ImageUploadProps) => {
   return (
     <div className='space-y-4 w-full flex flex-col justify-center items-center '>
       <CldUploadButton
-      onSuccess={(res:any) => {onChange(res?.info?.secure_url)}}
+      onSuccess={(res:any|string) => {onChange(res?.info?.secure_url)}}
         options={{
           maxFiles: 1,
         }}

@@ -1,61 +1,58 @@
-
 generator client {
-  provider = "prisma-client-js"
-  previewFeatures = ["fullTextSearch","fullTextIndex"]
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 datasource db {
   provider  = "postgresql"
   url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
-
 }
 
 model Category {
-  id            String @id @default(uuid())
-  name          String
-  companions    Companion[]
+  id         String      @id @default(uuid())
+  name       String
+  companions Companion[]
 }
 
 model Companion {
-  id            String @id @default(uuid())
-  userId        String
-  userName      String
-  src           String
-  name          String @db.Text
-  description   String
-  instructions   String @db.Text
-  seed          String @db.Text
+  id           String @id @default(uuid())
+  userId       String
+  userName     String
+  src          String
+  name         String @db.Text
+  description  String
+  instructions String @db.Text
+  seed         String @db.Text
 
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  category      Category @relation(fields: [categoryId],references: [id])
-  categoryId    String
-
-  @@index([categoryId])
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId String
   // @@fulltext([name])
 
-  message message[]
+  messages Message[]
+
+  @@index([categoryId])
 }
 
-enum Role{
+enum Role {
   user
   system
 }
 
+model Message {
+  id        String   @id @default(uuid())
+  role      Role
+  content   String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-model message {
-  id            String @id @default(uuid())
-  role          Role
-  content       String @db.Text
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  companionId String
+  userId      String
 
-  companionId    String
-  userId         String
-
-  companion      Companion @relation(fields: [companionId],references: [id],onDelete: Cascade)
+  companion Companion @relation(fields: [companionId], references: [id], onDelete: Cascade)
 
   @@index([companionId])
 }

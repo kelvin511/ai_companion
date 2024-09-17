@@ -3,10 +3,6 @@ import type { Metadata } from 'next/dist/lib/metadata/types/metadata-interface';
 import './globals.css';
 import {
   ClerkProvider,
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  UserButton,
 } from '@clerk/nextjs';
 import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/toaster'

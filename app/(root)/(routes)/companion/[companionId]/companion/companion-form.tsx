@@ -210,7 +210,7 @@ const CompanionForm = ({ initialData, categories }: CompanionFormProps) => {
                     <Textarea className='bg-background resize-none' rows={7} disabled={isLoading} placeholder={PREAMBLE} {...field}/>
                   </FormControl>
                   <FormDescription>
-                    Describe in detail your companion's history and back story
+                    Describe in detail your companion`&apos`s history and back story
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
